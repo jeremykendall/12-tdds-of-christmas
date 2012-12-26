@@ -26,7 +26,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-		$this->object = null;
+        $this->object = null;
     }
 
     /**
@@ -34,7 +34,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMinimumValue()
     {
-		$this->assertEquals(-2, $this->object->getMinimumValue());
+        $this->assertEquals(-2, $this->object->getMinimumValue());
     }
 
     /**
@@ -42,7 +42,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMaximumValue()
     {
-		$this->assertEquals(92, $this->object->getMaximumValue());
+        $this->assertEquals(92, $this->object->getMaximumValue());
     }
 
     /**
@@ -50,7 +50,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
      */
     public function testCountElements()
     {
-		$this->assertEquals(6, $this->object->countElements());
+        $this->assertEquals(6, $this->object->countElements());
     }
 
     /**
@@ -58,6 +58,6 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAverageValue()
     {
-		$this->assertEquals(21.833333, $this->object->getAverageValue());
+        $this->assertEquals(21.833333, $this->object->getAverageValue());
     }
 }
