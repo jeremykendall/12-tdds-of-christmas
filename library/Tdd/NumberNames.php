@@ -45,7 +45,8 @@ class NumberNames
      *
      * Example: 310 would become three hundred and ten.
      *
-     * @param int $integer Integer to convert
+     * @param  int    $integer Integer to convert
+     * @return string English language equivalent of provided integer
      */
     public function convert($integer)
     {
@@ -70,7 +71,7 @@ class NumberNames
             $count--;
 
             if ($temp) {
-                $name[] = trim($temp);
+                $name[] = $temp;
             }
         }
 
@@ -82,7 +83,11 @@ class NumberNames
         $string = null;
 
         if ($hundreds[0]) {
-            $string = $this->unique[$hundreds[0]] . ' hundred ';
+            $string = $this->unique[$hundreds[0]] . ' hundred';
+        }
+
+        if ($string && ltrim(substr($hundreds, 1), '0')) {
+            $string .= ' and ';
         }
 
         return $string;
@@ -95,11 +100,11 @@ class NumberNames
         }
 
         $temp = null;
-        
+
         if ($tens[0] > 0) {
             $temp .= $this->unique[$tens[0] * 10] . ' ';
         }
-        
+
         if ($tens[1] > 0) {
             $temp .= $this->unique[$tens[1]];
         }
