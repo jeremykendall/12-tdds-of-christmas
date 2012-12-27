@@ -29,33 +29,21 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
         $this->object = null;
     }
 
-    /**
-     * @covers Tdd\CalcStats::getMinimumValue
-     */
     public function testGetMinimumValue()
     {
         $this->assertEquals(-2, $this->object->getMinimumValue());
     }
 
-    /**
-     * @covers Tdd\CalcStats::getMaximumValue
-     */
     public function testGetMaximumValue()
     {
         $this->assertEquals(92, $this->object->getMaximumValue());
     }
 
-    /**
-     * @covers Tdd\CalcStats::countElements
-     */
     public function testCountElements()
     {
         $this->assertEquals(6, $this->object->countElements());
     }
 
-    /**
-     * @covers Tdd\CalcStats::getAverageValue
-     */
     public function testGetAverageValue()
     {
         $this->assertEquals(21.833333, $this->object->getAverageValue());
