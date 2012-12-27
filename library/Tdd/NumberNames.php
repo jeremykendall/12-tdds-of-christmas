@@ -70,7 +70,7 @@ class NumberNames
             $count--;
 
             if ($temp) {
-                $name[] = $temp;
+                $name[] = trim($temp);
             }
         }
 
@@ -82,11 +82,7 @@ class NumberNames
         $string = null;
 
         if ($hundreds[0]) {
-            $string = $this->unique[$hundreds[0]] . ' hundred';
-        }
-
-        if ($string && ltrim(substr($hundreds, 1), '0')) {
-            $string .= ' and ';
+            $string = $this->unique[$hundreds[0]] . ' hundred ';
         }
 
         return $string;

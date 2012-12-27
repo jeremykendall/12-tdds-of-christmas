@@ -47,15 +47,15 @@ class NumberNamesTest extends \PHPUnit_Framework_TestCase
             array(67, 'sixty seven'),
             array(99, 'ninety nine'),
             array(300, 'three hundred'),
-            array(804, 'eight hundred and four'),
-            array(220, 'two hundred and twenty'),
-            array(645, 'six hundred and forty five'),
-            array(118, 'one hundred and eighteen'),
+            array(804, 'eight hundred four'),
+            array(220, 'two hundred twenty'),
+            array(645, 'six hundred forty five'),
+            array(118, 'one hundred eighteen'),
             array(1000, 'one thousand'),
-            array(1501, 'one thousand, five hundred and one'),
-            array(12609, 'twelve thousand, six hundred and nine'),
-            array(512607, 'five hundred and twelve thousand, six hundred and seven'),
-            array(43112603, 'forty three million, one hundred and twelve thousand, six hundred and three')
+            array(1501, 'one thousand, five hundred one'),
+            array(12609, 'twelve thousand, six hundred nine'),
+            array(512607, 'five hundred twelve thousand, six hundred seven'),
+            array(43112603, 'forty three million, one hundred twelve thousand, six hundred three')
         );
     }
 }
