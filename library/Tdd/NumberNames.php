@@ -4,7 +4,7 @@ namespace Tdd;
 
 class NumberNames
 {
-    protected $unique = array(
+    protected $dictionary = array(
         'zero',
         'one',
         'two',
@@ -83,7 +83,7 @@ class NumberNames
         $string = null;
 
         if ($hundreds[0]) {
-            $string = $this->unique[$hundreds[0]] . ' hundred';
+            $string = $this->dictionary[$hundreds[0]] . ' hundred';
         }
 
         if ($string && ltrim(substr($hundreds, 1), '0')) {
@@ -95,18 +95,18 @@ class NumberNames
 
     public function getTens($tens)
     {
-        if (array_key_exists($tens, $this->unique)) {
-            return $this->unique[$tens];
+        if (array_key_exists($tens, $this->dictionary)) {
+            return $this->dictionary[$tens];
         }
 
         $temp = null;
 
         if ($tens[0] > 0) {
-            $temp .= $this->unique[$tens[0] * 10] . ' ';
+            $temp .= $this->dictionary[$tens[0] * 10] . ' ';
         }
 
         if ($tens[1] > 0) {
-            $temp .= $this->unique[$tens[1]];
+            $temp .= $this->dictionary[$tens[1]];
         }
 
         return $temp;
