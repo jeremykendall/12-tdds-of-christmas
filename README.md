@@ -17,4 +17,4 @@ run `php composer.phar install` to install the project dependency.
 
 ### Running the tests
 
-Run the tests by calling `phpunit` in the root of the project.
+Run the tests by calling `./vendor/bin/phpunit` in the root of the project.
