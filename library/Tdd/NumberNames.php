@@ -1,7 +1,20 @@
 <?php
 
+/**
+ * 12 TDDs of Christmas
+ *
+ * @link      http://github.com/jeremykendall/12-tdds-of-christmas for the canonical source repository
+ * @copyright Copyright (c) 2012 Jeremy Kendall (http://about.me/jeremykendall)
+ * @license   http://github.com/jeremykendall/12-tdds-of-christmas/blob/master/LICENSE MIT License
+ * @see       http://www.wiredtothemoon.com/2012/12/12-tdds-of-christmas/ 12 TDDs of Chrismas blog post
+ */
+
 namespace Tdd;
 
+/**
+ * NumberNames will return the English language equivalent of a provided
+ * integer: #12TDDs Day Two
+ */
 class NumberNames
 {
     protected $dictionary = array(
