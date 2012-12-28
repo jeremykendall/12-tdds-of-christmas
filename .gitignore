@@ -1,3 +1,4 @@
 tests/log
 *.swp
 composer.lock
+vendor
