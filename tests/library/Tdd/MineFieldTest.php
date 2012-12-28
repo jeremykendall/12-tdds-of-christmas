@@ -17,6 +17,7 @@ class MineFieldTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHintField()
     {
+        $this->markTestIncomplete();
         $map = <<<'EOT'
 3 4
 *...
