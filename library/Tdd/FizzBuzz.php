@@ -29,21 +29,20 @@ class FizzBuzz
      */
     public function of($number)
     {
-        $result = null;
+        
+        if ($number % 15 == 0) {
+            return 'FizzBuzz';
+        }
 
         if ($number % 3 == 0) {
-            $result = 'Fizz';
+            return 'Fizz';
         }
 
         if ($number % 5 == 0) {
-            $result .= 'Buzz';
+            return 'Buzz';
         }
 
-        if (!$result) {
-            $result = $number;
-        }
-
-        return $result;
+        return $number;
     }
 
 }
