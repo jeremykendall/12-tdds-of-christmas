@@ -82,8 +82,14 @@ class NumberNames
         foreach ($numbers as $number) {
             $padded = sprintf('%03d', $number);
 
-            $temp = $this->getHundreds($padded);
-            $temp .= $this->getTens(substr($padded, 1));
+            $hundreds = $this->getHundreds($padded);
+            $tens = $this->getTens(substr($padded, 1));
+
+            $temp = $hundreds . $tens;
+
+            if ($hundreds && $tens) {
+                $temp = $hundreds . ' and ' . $tens;
+            }
 
             if ($count > 1) {
                 $temp .= ' ' . $this->units[$count];
@@ -103,8 +109,7 @@ class NumberNames
      * Converts the hundreds place into English words
      *
      * @param  int    $hundreds Three digit integer
-     * @return string Hundreds number in English in the form of 'n hundred
-     * [and]'
+     * @return string Hundreds number in English in the form of 'n hundred'
      */
     protected function getHundreds($hundreds)
     {
@@ -112,10 +117,6 @@ class NumberNames
 
         if ($hundreds[0]) {
             $string = $this->dictionary[$hundreds[0]] . ' hundred';
-        }
-
-        if ($string && ltrim(substr($hundreds, 1), '0')) {
-            $string .= ' and ';
         }
 
         return $string;
@@ -127,7 +128,7 @@ class NumberNames
      * @param  int    $tens Two digit integer
      * @return string Tens in English. Can be one - ninety nine
      */
-    public function getTens($tens)
+    protected function getTens($tens)
     {
         if (array_key_exists($tens, $this->dictionary)) {
             return $this->dictionary[$tens];

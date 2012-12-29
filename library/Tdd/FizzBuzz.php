@@ -29,7 +29,7 @@ class FizzBuzz
      */
     public function of($number)
     {
-        
+
         if ($number % 15 == 0) {
             return 'FizzBuzz';
         }
