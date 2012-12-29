@@ -63,15 +63,15 @@ class MineField
         $this->map = $map;
     }
 
-	/**
-	 * Returns string representation of the hint field
-	 *
-	 * @return string String representation of hint field
-	 */
-	public function getHintField()
-	{
-		return $this->hintFieldToString($this->generateHintField());
-	}
+    /**
+     * Returns string representation of the hint field
+     *
+     * @return string String representation of hint field
+     */
+    public function getHintField()
+    {
+        return $this->hintFieldToString($this->generateHintField());
+    }
 
     /**
      * Generates a hint map from the minefield map
@@ -96,21 +96,21 @@ class MineField
         return $hintField;
     }
 
-	/**
-	 * Returns string representation of the hint field
-	 *
-	 * @param array $hintField Hint field
-	 * @return string String representation of hint field
-	 */
+    /**
+     * Returns string representation of the hint field
+     *
+     * @param  array  $hintField Hint field
+     * @return string String representation of hint field
+     */
     protected function hintFieldToString(array $hintField)
     {
-        $transform = array();
+        $temp = array();
 
-        foreach ($hintField as $node) {
-            $transform[] = implode('', $node);
+        foreach ($hintField as $row) {
+            $temp[] = implode('', $row);
         }
 
-        return implode("\n", $transform);
+        return implode("\n", $temp);
     }
 
     protected function countAdjacentMines($x, $y)
@@ -131,7 +131,12 @@ class MineField
 
     public function findAdjacentNodes($x, $y)
     {
-        if (!$this->isValidNode(array('x' => $x, 'y' => $y))) {
+        $node = array(
+            'x' => $x,
+            'y' => $y
+        );
+
+        if (!$this->isValidNode($node)) {
             throw new \Exception("'$x, $y' is not a valid set of coordinates");
         }
 
