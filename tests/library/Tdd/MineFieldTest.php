@@ -118,7 +118,6 @@ EOT;
         $this->assertTrue($this->mineField->isValidNode(array('x' => 1, 'y' => 1)));
         $this->assertTrue($this->mineField->isValidNode(array('x' => 3, 'y' => 2)));
 
-
         $this->assertFalse($this->mineField->isValidNode(array('x' => -1, 'y' => 7)));
         $this->assertFalse($this->mineField->isValidNode(array('x' => 6, 'y' => 5)));
     }
@@ -140,6 +139,12 @@ EOT;
         $this->assertEquals($hintField, $mineField->getHintField());
     }
 
+    /**
+     * Test cases provided by @tjlytle. Thanks, man!
+     *
+     * @see https://github.com/tjlytle Tim Lytle on Github
+     * @see https://gist.github.com/4401086 MineField test cases
+     */
     public function mineFieldDataProvider()
     {
         $data = array();
