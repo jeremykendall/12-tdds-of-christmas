@@ -13,7 +13,8 @@ namespace Tdd;
 
 /**
  * The MineField class stores and provides info about the provided minefield map:
- * #12TDDs Day Three
+ *
+ * @package TwelveTddsOfChristmas\Day3
  */
 class MineField
 {

@@ -13,7 +13,9 @@ namespace Tdd;
 
 /**
  * NumberNames will return the English language equivalent of a provided
- * integer: #12TDDs Day Two
+ * integer
+ *
+ * @package TwelveTddsOfChristmas\Day2
  */
 class NumberNames
 {

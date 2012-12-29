@@ -13,6 +13,8 @@ namespace Tdd;
 
 /**
  * CalcStats provides data about a sequence of numbers: #12TDDs Day One
+ *
+ * @package TwelveTddsOfChristmas\Day1
  */
 class CalcStats
 {
