@@ -37,90 +37,198 @@ EOT;
             0 => array('.', '.', '.', '.')
         );
 
-		$this->mineField = new MineField($this->mapData);
+        $this->mineField = new MineField($this->mapData);
     }
 
     protected function tearDown()
     {
         $this->mapData = null;
-		$this->map = null;
-		$this->mineField = null;
+        $this->map = null;
+        $this->mineField = null;
     }
 
-	public function testGetHintField()
-	{
-		$expected = <<<'EOT'
+    public function testGetHintField()
+    {
+        $expected = <<<'EOT'
 *211
 12*1
 0111
 EOT;
-		$this->assertEquals($expected, $this->mineField->getHintField());
-	}
+        $this->assertEquals($expected, $this->mineField->getHintField());
+    }
 
     public function testGetMap()
     {
         $this->assertEquals($this->map, $this->mineField->getMap());
     }
 
-	public function testGetRows()
-	{
-		$this->assertEquals(3, $this->mineField->getRows());
-	}
+    public function testGetRows()
+    {
+        $this->assertEquals(3, $this->mineField->getRows());
+    }
 
-	public function testGetColumns()
-	{
-		$this->assertEquals(4, $this->mineField->getColumns());
-	}
+    public function testGetColumns()
+    {
+        $this->assertEquals(4, $this->mineField->getColumns());
+    }
 
-	/**
-	 * @dataProvider adjacentNodesDataProvider
-	 */
-	public function testFindAdjacentNodes($x, $y, $nodeList)
-	{
-		$this->assertEquals($nodeList, $this->mineField->findAdjacentNodes($x, $y));
-	}
+    /**
+     * @dataProvider adjacentNodesDataProvider
+     */
+    public function testFindAdjacentNodes($x, $y, $nodeList)
+    {
+        $this->assertEquals($nodeList, $this->mineField->findAdjacentNodes($x, $y));
+    }
 
-	public function adjacentNodesDataProvider()
-	{
-		return array(
-			array(0, 0, array(
-				'north' => array('x' => 0, 'y' => 1),
-				'north-east' => array('x' => 1, 'y' => 1),
-				'east' => array('x' => 1, 'y' => 0)
-			)),
-			array(3, 2, array(
-				'south' => array('x' => 3, 'y' => 1),
-				'south-west' => array('x' => 2, 'y' => 1),
-				'west' => array('x' => 2, 'y' => 2)
-			)),
-			array(1, 1, array(
-				'north' => array('x' => 1, 'y' => 2),	
-				'north-east' => array('x' => 2, 'y' => 2),	
-				'east' => array('x' => 2, 'y' => 1),	
-				'south-east' => array('x' => 2, 'y' => 0),	
-				'south' => array('x' => 1, 'y' => 0),	
-				'south-west' => array('x' => 0, 'y' => 0),	
-				'west' => array('x' => 0, 'y' => 1),	
-				'north-west' => array('x' => 0, 'y' => 2),	
-			))
-		);
-	}
+    public function adjacentNodesDataProvider()
+    {
+        return array(
+            array(0, 0, array(
+                'north' => array('x' => 0, 'y' => 1),
+                'north-east' => array('x' => 1, 'y' => 1),
+                'east' => array('x' => 1, 'y' => 0)
+            )),
+            array(3, 2, array(
+                'south' => array('x' => 3, 'y' => 1),
+                'south-west' => array('x' => 2, 'y' => 1),
+                'west' => array('x' => 2, 'y' => 2)
+            )),
+            array(1, 1, array(
+                'north' => array('x' => 1, 'y' => 2),
+                'north-east' => array('x' => 2, 'y' => 2),
+                'east' => array('x' => 2, 'y' => 1),
+                'south-east' => array('x' => 2, 'y' => 0),
+                'south' => array('x' => 1, 'y' => 0),
+                'south-west' => array('x' => 0, 'y' => 0),
+                'west' => array('x' => 0, 'y' => 1),
+                'north-west' => array('x' => 0, 'y' => 2),
+            ))
+        );
+    }
 
-	public function testFindAdjacentNodesInvalidNodeThrowsException()
-	{
-		$this->setExpectedException('\Exception', "'12, 22' is not a valid set of coordinates");
-		$this->mineField->findAdjacentNodes(12, 22);
-	}
+    public function testFindAdjacentNodesInvalidNodeThrowsException()
+    {
+        $this->setExpectedException('\Exception', "'12, 22' is not a valid set of coordinates");
+        $this->mineField->findAdjacentNodes(12, 22);
+    }
 
-	public function testIsValidNode()
-	{
-		$this->assertTrue($this->mineField->isValidNode(array('x' => 0, 'y' => 0)));
-		$this->assertTrue($this->mineField->isValidNode(array('x' => 1, 'y' => 1)));
-		$this->assertTrue($this->mineField->isValidNode(array('x' => 3, 'y' => 2)));
+    public function testIsValidNode()
+    {
+        $this->assertTrue($this->mineField->isValidNode(array('x' => 0, 'y' => 0)));
+        $this->assertTrue($this->mineField->isValidNode(array('x' => 1, 'y' => 1)));
+        $this->assertTrue($this->mineField->isValidNode(array('x' => 3, 'y' => 2)));
 
 
-		$this->assertFalse($this->mineField->isValidNode(array('x' => -1, 'y' => 7)));
-		$this->assertFalse($this->mineField->isValidNode(array('x' => 6, 'y' => 5)));
-	}
+        $this->assertFalse($this->mineField->isValidNode(array('x' => -1, 'y' => 7)));
+        $this->assertFalse($this->mineField->isValidNode(array('x' => 6, 'y' => 5)));
+    }
+
+    /**
+     * This test rolls through multiple maps and returns the associated hint
+     * fields.
+     *
+     * The other tests in this suite are all related to $this->mineField
+     * fed by $this->mapData and are intended to extensively test MineField.
+     * This test will only test the $hintField returned for the provided
+     * $mapData
+     *
+     * @dataProvider mineFieldDataProvider
+     */
+    public function testGetHintFieldOnly($mapData, $hintField)
+    {
+        $mineField = new MineField($mapData);
+        $this->assertEquals($hintField, $mineField->getHintField());
+    }
+
+    public function mineFieldDataProvider()
+    {
+        $data = array();
+
+        $mapData = <<<'EOT'
+5 5
+.....
+.***.
+.*.*.
+.***.
+.....
+EOT;
+        $hintField = <<<'EOT'
+12321
+2***2
+3*8*3
+2***2
+12321
+EOT;
+        $data[] = array($mapData, $hintField);
+
+
+        $mapData = <<<'EOT'
+5 5
+.....
+.....
+..*..
+.....
+.....
+EOT;
+        $hintField = <<<'EOT'
+00000
+01110
+01*10
+01110
+00000
+EOT;
+        $data[] = array($mapData, $hintField);
+
+        $mapData = <<<'EOT'
+5 3
+...
+...
+.*.
+...
+...
+EOT;
+        $hintField = <<<'EOT'
+000
+111
+1*1
+111
+000
+EOT;
+        $data[] = array($mapData, $hintField);
+
+        $mapData = <<<'EOT'
+3 10
+..........
+....*.....
+..........
+EOT;
+        $hintField = <<<'EOT'
+0001110000
+0001*10000
+0001110000
+EOT;
+        $data[] = array($mapData, $hintField);
+
+        $mapData = <<<'EOT'
+6 8
+..**....
+.......*
+..*..*.*
+..****..
+........
+*.......
+EOT;
+        $hintField = <<<'EOT'
+01**1011
+0233213*
+02*44*4*
+02****31
+12233210
+*1000000
+EOT;
+        $data[] = array($mapData, $hintField);
+
+        return $data;
+    }
 
 }
