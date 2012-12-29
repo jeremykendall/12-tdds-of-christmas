@@ -37,7 +37,7 @@ class NumberNamesTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($string, $this->object->convert($integer));
     }
-    
+
 public function convertDataProvider()
     {
         return array(
