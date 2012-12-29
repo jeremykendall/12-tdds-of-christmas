@@ -20,17 +20,17 @@ class MineField
 {
 
     /**
-     * @var array
+     * @var array Minefield map
      */
     protected $map;
 
     /**
-     * @var int
+     * @var int Map row count
      */
     protected $rows;
 
     /**
-     * @var int
+     * @var int Map column count
      */
     protected $columns;
 
@@ -114,6 +114,13 @@ class MineField
         return implode("\n", $temp);
     }
 
+    /**
+     * Counts mines adjacent to node identified by x, y coordinates
+     *
+     * @param  int $x X coordinate
+     * @param  int $y Y coordinate
+     * @return int Count of mines adjacent to node
+     */
     protected function countAdjacentMines($x, $y)
     {
         $adjacentMineCount = 0;
@@ -130,6 +137,13 @@ class MineField
         return $adjacentMineCount;
     }
 
+    /**
+     * Finds nodes adjacent to node identified by x, y coordinates
+     *
+     * @param  int   $x X coordinate
+     * @param  int   $y Y coordinate
+     * @return array Array of adjacent nodes
+     */
     public function findAdjacentNodes($x, $y)
     {
         $node = array(
@@ -155,7 +169,7 @@ class MineField
         $adjacentNodeList = array_filter($candidates, array($this, 'isValidNode'));
 
         return $adjacentNodeList;
-     }
+    }
 
     /**
      * Tests node to see if it exists in map
@@ -175,16 +189,31 @@ class MineField
         return false;
     }
 
+    /**
+     * Gets map row count
+     *
+     * @return int Row count
+     */
     public function getRows()
     {
         return $this->rows;
     }
 
+    /**
+     * Gets map column count
+     *
+     * @return int Column count
+     */
     public function getColumns()
     {
         return $this->columns;
     }
 
+    /**
+     * Gets minefield map
+     *
+     * @return array Minefield map
+     */
     public function getMap()
     {
         return $this->map;

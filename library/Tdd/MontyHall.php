@@ -57,6 +57,17 @@ class MontyHall
         return array_rand($this->doors);
     }
 
+    /**
+     * Host chooses door.
+     *
+     * Host must choose a door after the contestant chooses a door. The host
+     * must choose a door that has a goat behind it. If the contestant's choice
+     * of door hides a car, the host's choice of door must be random.
+     *
+     * @param int $contestantChoice Array key of $this->doors representing
+     * contestant choice
+     * @return int Array key of $this->doors representing host choice
+     */
     public function hostChooseGoat($contestantChoice)
     {
         // Remove contestant's choice from host's choices
@@ -64,9 +75,18 @@ class MontyHall
         // Gets array of all $doors keys with value of 'goat'
         $goats = array_keys($remainingDoors, 'goat');
 
+        // Return random value from $goats array
+        // (values of $goats array are keys from $this->doors)
         return $goats[array_rand($goats)];
     }
 
+    /**
+     * Contestant switches choice from initial choice to only remaining door
+     *
+     * @param  int $contestantChoice Contestant's choice
+     * @param  int $hostChoice       Host's choice
+     * @return int Contestant's new choice
+     */
     public function contestantSwitchChoice($contestantChoice, $hostChoice)
     {
         $remainingDoor = array_diff_key($this->doors, array($contestantChoice => null, $hostChoice => null));
@@ -74,11 +94,23 @@ class MontyHall
         return key($remainingDoor);
     }
 
+    /**
+     * Tests choice for win. A choice is a winning choice if a car is behind the
+     * door.
+     *
+     * @param  int  $choice Choice to test for win
+     * @return bool True if choice is winning, false otherwise
+     */
     public function isWinningChoice($choice)
     {
         return $this->doors[$choice] == 'car';
     }
 
+    /**
+     * Sets doors
+     *
+     * @param array $doors Array of doors and prizes behind them
+     */
     public function setDoors(array $doors)
     {
         $this->doors = $doors;

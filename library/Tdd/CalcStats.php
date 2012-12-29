@@ -12,7 +12,7 @@
 namespace Tdd;
 
 /**
- * CalcStats provides data about a sequence of numbers: #12TDDs Day One
+ * CalcStats provides data about a sequence of numbers
  *
  * @package TwelveTddsOfChristmas\Day1
  */
@@ -25,7 +25,7 @@ class CalcStats
 
     /**
      * Public constructor
-     * 
+     *
      * @param array $sequence Array of integers
      */
     public function __construct(array $sequence)
@@ -52,19 +52,19 @@ class CalcStats
     {
         return max($this->sequence);
     }
-    
+
     /**
-     * Counts numbers in sequence
+     * Gets count of numbers in sequence
      *
      * @return int Count of numbers in sequence
-     */ 
+     */
     public function countElements()
     {
         return count($this->sequence);
     }
 
     /**
-     * Averages numbers in sequence
+     * Gets average of numbers in sequence
      *
      * @return float Average of numbers in sequence
      */

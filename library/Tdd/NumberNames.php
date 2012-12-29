@@ -19,6 +19,9 @@ namespace Tdd;
  */
 class NumberNames
 {
+    /**
+     * @var array English integer equivalents
+     */
     protected $dictionary = array(
         'zero',
         'one',
@@ -50,6 +53,9 @@ class NumberNames
         90 => 'ninety'
     );
 
+    /**
+     * @var array English number unit names
+     */
     protected $units = array(
         2 => 'thousand',
         3 => 'million'
@@ -93,6 +99,13 @@ class NumberNames
         return implode(', ', $name);
     }
 
+    /**
+     * Converts the hundreds place into English words
+     *
+     * @param  int    $hundreds Three digit integer
+     * @return string Hundreds number in English in the form of 'n hundred
+     * [and]'
+     */
     protected function getHundreds($hundreds)
     {
         $string = null;
@@ -108,6 +121,12 @@ class NumberNames
         return $string;
     }
 
+    /**
+     * Converts the tens numbers into English words
+     *
+     * @param  int    $tens Two digit integer
+     * @return string Tens in English. Can be one - ninety nine
+     */
     public function getTens($tens)
     {
         if (array_key_exists($tens, $this->dictionary)) {
