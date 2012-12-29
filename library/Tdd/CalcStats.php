@@ -18,28 +18,56 @@ namespace Tdd;
  */
 class CalcStats
 {
+    /**
+     * @var array Array of integers
+     */
     protected $sequence;
 
+    /**
+     * Public constructor
+     * 
+     * @param array $sequence Array of integers
+     */
     public function __construct(array $sequence)
     {
         $this->sequence = $sequence;
     }
 
+    /**
+     * Gets minimum sequence value
+     *
+     * @return int Minimum value
+     */
     public function getMinimumValue()
     {
         return min($this->sequence);
     }
 
+    /**
+     * Gets maximum sequence value
+     *
+     * @return int Maximum value
+     */
     public function getMaximumValue()
     {
         return max($this->sequence);
     }
-
+    
+    /**
+     * Counts numbers in sequence
+     *
+     * @return int Count of numbers in sequence
+     */ 
     public function countElements()
     {
         return count($this->sequence);
     }
 
+    /**
+     * Averages numbers in sequence
+     *
+     * @return float Average of numbers in sequence
+     */
     public function getAverageValue()
     {
         $total = $this->countElements();
