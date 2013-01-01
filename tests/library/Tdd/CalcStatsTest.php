@@ -12,6 +12,8 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
         // stats, min, max, count, average
         return array(
             array(new CalcStats(array(6, 9, 15, -2, 92, 11)), -2, 92, 6, 21.833333),
+            array(new CalcStats(array(1, 3)), 1, 3, 2, 2),
+            array(new CalcStats(array(0, 0, 0, 0, 0)), 0, 0, 5, 0),
         );
     }
 
@@ -30,7 +32,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider calcStatsProvider
      */
-    public function testGetMinimumValue($stats, $min, $max, $count, $average)
+    public function testGetMinimumValue(CalcStats $stats, $min, $max, $count, $average)
     {
         $this->assertEquals($min, $stats->getMinimumValue());
     }
@@ -38,7 +40,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider calcStatsProvider
      */
-    public function testGetMaximumValue($stats, $min, $max, $count, $average)
+    public function testGetMaximumValue(CalcStats $stats, $min, $max, $count, $average)
     {
         $this->assertEquals($max, $stats->getMaximumValue());
     }
@@ -46,7 +48,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider calcStatsProvider
      */
-    public function testCountElements($stats, $min, $max, $count, $average)
+    public function testCountElements(CalcStats $stats, $min, $max, $count, $average)
     {
         $this->assertEquals($count, $stats->countElements());
     }
@@ -54,7 +56,7 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider calcStatsProvider
      */
-    public function testGetAverageValue($stats, $min, $max, $count, $average)
+    public function testGetAverageValue(CalcStats $stats, $min, $max, $count, $average)
     {
         $this->assertEquals($average, $stats->getAverageValue());
     }
