@@ -7,27 +7,12 @@ namespace Tdd;
  */
 class CalcStatsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var CalcStats
-     */
-    protected $object;
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public static function calcStatsProvider()
     {
-        $this->object = new CalcStats(array(6, 9, 15, -2, 92, 11));
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-        $this->object = null;
+        // stats, min, max, count, average
+        return array(
+            array(new CalcStats(array(6, 9, 15, -2, 92, 11)), -2, 92, 6, 21.833333),
+        );
     }
 
     public function testEmptySequenceThrowsException()
@@ -42,23 +27,35 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
         new CalcStats(array(1));
     }
 
-    public function testGetMinimumValue()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testGetMinimumValue($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(-2, $this->object->getMinimumValue());
+        $this->assertEquals($min, $stats->getMinimumValue());
     }
 
-    public function testGetMaximumValue()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testGetMaximumValue($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(92, $this->object->getMaximumValue());
+        $this->assertEquals($max, $stats->getMaximumValue());
     }
 
-    public function testCountElements()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testCountElements($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(6, $this->object->countElements());
+        $this->assertEquals($count, $stats->countElements());
     }
 
-    public function testGetAverageValue()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testGetAverageValue($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(21.833333, $this->object->getAverageValue());
+        $this->assertEquals($average, $stats->getAverageValue());
     }
 }
