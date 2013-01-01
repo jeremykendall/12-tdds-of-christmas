@@ -30,6 +30,18 @@ class CalcStatsTest extends \PHPUnit_Framework_TestCase
         $this->object = null;
     }
 
+    public function testEmptySequenceThrowsException()
+    {
+        $this->setExpectedException('\Exception', '$sequence array must contain at least two elements');
+        new CalcStats(array());
+    }
+    
+    public function testSequenceWithSingleElementThrowsException()
+    {
+        $this->setExpectedException('\Exception', '$sequence array must contain at least two elements');
+        new CalcStats(array(1));
+    }
+
     public function testGetMinimumValue()
     {
         $this->assertEquals(-2, $this->object->getMinimumValue());

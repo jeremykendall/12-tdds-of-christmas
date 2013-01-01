@@ -30,6 +30,10 @@ class CalcStats
      */
     public function __construct(array $sequence)
     {
+        if (count($sequence) < 2) {
+            throw new \Exception('$sequence array must contain at least two elements');
+        }
+
         $this->sequence = $sequence;
     }
 
