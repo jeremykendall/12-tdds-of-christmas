@@ -7,6 +7,11 @@ namespace Tdd;
  */
 class CalcStatsTest extends \PHPUnit_Framework_TestCase
 {
+    public function testObjectCreation()
+    {
+        new CalcStats(array(1, 2, 3));
+    }
+
     public static function calcStatsProvider()
     {
         // stats, min, max, count, average
