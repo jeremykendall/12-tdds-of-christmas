@@ -7,46 +7,43 @@ namespace Tdd;
  */
 class CalcStatsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var CalcStats
-     */
-    protected $object;
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public static function calcStatsProvider()
     {
-        $this->object = new CalcStats(array(6, 9, 15, -2, 92, 11));
+        // stats, min, max, count, average
+        return array(
+            array(new CalcStats(array(6, 9, 15, -2, 92, 11)), -2, 92, 6, 21.833333),
+        );
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
+     * @dataProvider calcStatsProvider
      */
-    protected function tearDown()
+    public function testGetMinimumValue($stats, $min, $max, $count, $average)
     {
-        $this->object = null;
+        $this->assertEquals($min, $stats->getMinimumValue());
     }
 
-    public function testGetMinimumValue()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testGetMaximumValue($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(-2, $this->object->getMinimumValue());
+        $this->assertEquals($max, $stats->getMaximumValue());
     }
 
-    public function testGetMaximumValue()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testCountElements($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(92, $this->object->getMaximumValue());
+        $this->assertEquals($count, $stats->countElements());
     }
 
-    public function testCountElements()
+    /**
+     * @dataProvider calcStatsProvider
+     */
+    public function testGetAverageValue($stats, $min, $max, $count, $average)
     {
-        $this->assertEquals(6, $this->object->countElements());
-    }
-
-    public function testGetAverageValue()
-    {
-        $this->assertEquals(21.833333, $this->object->getAverageValue());
+        $this->assertEquals($average, $stats->getAverageValue());
     }
 }
