@@ -9,6 +9,10 @@
         <directory>tests/library</directory>
     </testsuite>
 
+    <testsuite name="template-engine">
+        <directory>tests/library/Tdd/TemplateEngine</directory>
+    </testsuite>
+
     <filter>
         <whitelist>
             <directory suffix=".php">./library</directory>
