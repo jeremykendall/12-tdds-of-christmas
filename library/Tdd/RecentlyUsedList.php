@@ -95,14 +95,15 @@ class RecentlyUsedList implements \ArrayAccess, \Countable, \Iterator
     {
         if (is_null($offset)) {
             $this->push($value);
-        } else {
-            if ($this->search($value) !== false) {
-                $this->offsetUnset($this->search($value));
-            }
 
-            array_splice($this->list, $offset, 0, array($value));
-            //$this->list[$offset] = $value;
+            return;
         }
+
+        if ($this->search($value) !== false) {
+            $this->offsetUnset($this->search($value));
+        }
+
+        array_splice($this->list, $offset, 0, array($value));
     }
 
     /**
