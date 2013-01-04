@@ -9,14 +9,14 @@
  * @see       http://www.wiredtothemoon.com/2012/12/12-tdds-of-christmas/ 12 TDDs of Chrismas blog post
  */
 
-namespace Tdd\TemplateEngine;
+namespace Tdd;
 
 /**
  * Template
  *
  * @package TwelveTddsOfChristmas\Day7
  */
-class Template
+class TemplateEngine
 {
     /**
      * @var string regex format
@@ -36,8 +36,9 @@ class Template
 
         $patterns = array();
 
-        foreach ($map as $token => $replacement) {
+        foreach ($map as $token => &$replacement) {
             $patterns[] = sprintf($this->regexFormat, $token);
+            $replacement = $this->escape($replacement);
         }
 
         return preg_replace($patterns, $map, $template);

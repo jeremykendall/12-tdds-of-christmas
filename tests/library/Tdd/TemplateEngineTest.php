@@ -1,19 +1,19 @@
 <?php
 
-namespace Tdd\TemplateEngine;
+namespace Tdd;
 
-class TemplateTest extends \PHPUnit_Framework_TestCase
+class TemplateEngineTest extends \PHPUnit_Framework_TestCase
 {
-    private $template;
+    private $templateEngine;
 
     protected function setUp()
     {
-        $this->template = new Template();
+        $this->templateEngine = new TemplateEngine();
     }
 
     protected function tearDown()
     {
-        $this->template = null;
+        $this->templateEngine = null;
     }
 
     /**
@@ -21,7 +21,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegexForFindingVariables($subject, $expected)
     {
-        $pattern = sprintf($this->template->getRegexFormat(), '\w*');
+        $pattern = sprintf($this->templateEngine->getRegexFormat(), '\w*');
         preg_match_all($pattern, $subject, $matches);
         $this->assertEquals($expected[0], $matches[0]);
     }
@@ -33,7 +33,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             $expected, 
-            $this->template->render($template, $map)
+            $this->templateEngine->render($template, $map)
         );
     }
 
@@ -42,17 +42,9 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Exception', 'The number of unique template tokens does not match the number of replacement variables.');
         $template = 'Hello {$mis} {$matched}';
         $map = array('mis' => 'Arthur');
-        $this->template->render($template, $map);
+        $this->templateEngine->render($template, $map);
     } 
 
-    /**
-     * @dataProvider escapeDataProvider
-     */
-    public function testEscape($unescaped, $escaped)
-    {
-        $this->assertEquals($escaped, $this->template->escape($unescaped));
-    }
- 
     public function regexDataProvider()
     {
         return array(
@@ -86,15 +78,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
                 'This seems ${{$adjective}}.',
                 'This seems ${silly}.',
                 array('adjective' => 'silly')
+            ),
+            array(
+                'Side item: {$side}.',
+                'Side item: &quot;Mac &amp; Cheese&quot;.',
+                array('side' => '"Mac & Cheese"')
             )
         );
     }
-
-    public function escapeDataProvider()
-    {
-        return array(
-            array('Mac & Cheese', 'Mac &amp; Cheese'),
-            array("array('side' => \"Mac & Cheese\");", "array(&#039;side&#039; =&gt; &quot;Mac &amp; Cheese&quot;);")
-        );
-    }
 }
+
