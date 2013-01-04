@@ -4,6 +4,16 @@ namespace Tdd\Range;
 
 class RangeTest extends \PHPUnit_Framework_TestCase
 {
+	/**
+	 * In a production app I don't think I would do this. For the purposes of 
+	 * this excercise, your range better step by 1.
+	 */
+	public function testRangeThatDoesNotStepByOneThrowsException()
+	{
+		$this->setExpectedException('\Exception', 'Range must step by 1');
+		new Range(10.1, 11.2);
+	}
+
     /**
      * @dataProvider rangeDataProvider
      */
@@ -28,14 +38,6 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($isContained, $range->contains($candidate));
     }
 
-    public function testEmptyRange()
-    {
-        $range = new Range();
-        $this->assertInstanceOf('Tdd\Range\EmptyRange', $range);
-        $this->assertInternalType('array', $range->getRange());
-        $this->assertEmpty($range->getRange());
-    }
-
     /**
      * @dataProvider intersectDataProvider
      */
@@ -49,7 +51,9 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         return array(
             array(1, 10, 11, false),
             array(-12, 52, -5, true),
-            array(10, 923, 10, true)
+            array(10, 923, 10, true),
+			array(null, null, 22, false),
+			array(12.7, 17.7, 13.9, true)
         );
     }
 
@@ -58,7 +62,9 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         return array(
             array(new Range(10, 20), new Range(15, 25), new Range(15, 20)),
             array(new Range(-12, 37), new Range(31, 33), new Range(31, 33)),
-            array(new Range(10, 20), new Range(95, 225), new Range(15, 20)),
+            array(new Range(10, 20), new Range(95, 225), new Range()),
+            array(new Range(), new Range(95, 225), new Range()),
+            array(new Range(95, 225), new Range(), new Range()),
         );
     }
 }

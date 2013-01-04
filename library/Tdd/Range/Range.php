@@ -18,6 +18,15 @@ namespace Tdd\Range;
  */
 class Range implements RangeInterface
 {
+    /**
+     * @var int Range minimum
+     */
+    protected $min;
+
+    /**
+     * @var int Range maximum
+     */
+    protected $max;
 
     /**
      * @var array Range
@@ -32,11 +41,18 @@ class Range implements RangeInterface
      */
     public function __construct($min = null, $max = null)
     {
+        $this->min = $min;
+        $this->max = $max;
+
         if (is_null($min) && is_null($max)) {
-            return new EmptyRange();
+            $this->range = array();
         }
 
         $this->range = range($min, $max);
+
+        if (max($this->range) != $max) {
+            throw new \Exception('Range must step by 1');
+        }
     }
 
     /**
@@ -59,6 +75,10 @@ class Range implements RangeInterface
     public function intersect(Range $range)
     {
         $intersect = array_intersect($this->range, $range->getRange());
+
+        if (empty($intersect)) {
+            return new Range();
+        }
 
         return new Range(min($intersect), max($intersect));
     }
