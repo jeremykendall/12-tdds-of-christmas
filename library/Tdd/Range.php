@@ -9,14 +9,14 @@
  * @see       http://www.wiredtothemoon.com/2012/12/12-tdds-of-christmas/ 12 TDDs of Chrismas blog post
  */
 
-namespace Tdd\Range;
+namespace Tdd;
 
 /**
  * Range deals with a range of numbers
  *
  * @package TwelveTddsOfChristmas\Day8
  */
-class Range implements RangeInterface
+class Range
 {
     /**
      * @var int Range minimum

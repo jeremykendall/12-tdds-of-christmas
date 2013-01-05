@@ -1,6 +1,6 @@
 <?php
 
-namespace Tdd\Range;
+namespace Tdd;
 
 class RangeTest extends \PHPUnit_Framework_TestCase
 {
