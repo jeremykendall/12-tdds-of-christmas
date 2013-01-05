@@ -24,14 +24,13 @@ class PhoneNumber
     /**
      * Checks phone list for consistency
      *
-     * @param  array $list List of numbers to check for consistency
-     * @return bool  True if consistent, false otherwise
+     * @param  array      $list List of numbers to check for consistency
+     * @return bool       True if consistent, false otherwise
+     * @throws \Exception Throws exception if list is empty
      */
     public function isConsistent(array $list)
     {
-        if (empty($list)) {
-            throw new \Exception('The phone list must have at least one entry');
-        }
+        $this->validateNotEmpty($list);
 
         $list = $this->filterList($list);
 
@@ -41,11 +40,7 @@ class PhoneNumber
                     continue;
                 }
 
-                if (strpos($number, $test) !== false) {
-                    return false;
-                }
-
-                if (strpos($test, $number) !== false) {
+                if (!$this->validateIsConsistent($number, $test)) {
                     return false;
                 }
             }
@@ -71,4 +66,28 @@ class PhoneNumber
         return $list;
     }
 
+    /**
+     * Throws exception if list is empty
+     *
+     * @param  array      $list List of numbers
+     * @throws \Exception Throws exception if list is empty
+     */
+    protected function validateNotEmpty(array $list)
+    {
+        if (empty($list)) {
+            throw new \Exception('The phone list must have at least one entry');
+        }
+    }
+
+    /**
+     * Tests consistency
+     *
+     * @param  string $a String to test
+     * @param  string $b String to test
+     * @return bool   True if neither string appears in the other, false otherwise
+     */
+    protected function validateIsConsistent($a, $b)
+    {
+        return (strpos($a, $b) !== 0 && strpos($b, $a) !== 0);
+    }
 }
