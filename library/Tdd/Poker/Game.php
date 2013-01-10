@@ -58,25 +58,14 @@ class Game
     {
         $format = '%s wins - %s';
 
-        $hands = array();
-
-        foreach ($this->players as $player) {
-            $hands[$player['name']] = $player['hand']->identifyHand();
-        }
-
-        $handCount = array_count_values($hands);
-
         usort($this->players, $this->sortPlayersByHand($this->handRankings));
         $winner = $this->players[0];
 
-        if ($handCount[$winner['hand']->identifyHand()] > 1) {
-            foreach ($this->players as $player) {
-                if ($player['hand']->identifyHand() == $winner['hand']->identifyHand()) {
-                    $compare[$player['name']] = $player['hand'];
-                }
-            }
+        $matchingHands = $this->findMatchingHands($winner['hand']);
 
-            $winner = $this->compareMatchingHands($compare);
+        if (!empty($matchingHands)) {
+
+            $winner = $this->compareMatchingHands($matchingHands);
 
             if ($winner == 'Tie') {
                 return $winner;
@@ -96,20 +85,26 @@ class Game
         );
     }
 
-    /**
-     * Sort function to sort players by score of their poker hand
-     *
-     * @return Closure Sort function to sort players by score of their poker hand
-     */
-    public function sortPlayersByScore()
+    public function findMatchingHands($hand)
     {
-        return function ($a, $b) {
-            if ($a['hand']->score() == $b['hand']->score()) {
-                return 0;
-            }
+        $hands = array();
+        $matchingHands = array();
 
-            return ($b['hand']->score() < $a['hand']->score()) ? -1 : 1;
-        };
+        foreach ($this->players as $player) {
+            $hands[$player['name']] = $player['hand']->identifyHand();
+        }
+
+        $handCount = array_count_values($hands);
+
+        if ($handCount[$hand->identifyHand()] > 1) {
+            foreach ($this->players as $player) {
+                if ($player['hand']->identifyHand() == $hand->identifyHand()) {
+                    $matchingHands[$player['name']] = $player['hand'];
+                }
+            }
+        }
+
+        return $matchingHands;
     }
 
     /**

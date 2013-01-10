@@ -97,10 +97,10 @@ class GameTest extends \PHPUnit_Framework_TestCase
                     ),
                     array(
                         'name' => 'White',
-                        'hand' => Hand::fromString('2C 3H 4S 8C KH')
+                        'hand' => Hand::fromString('2D 3H 5C 9S KH')
                     )
                 ),
-                'Black wins - High card: 9'
+                'Tie'
             ),
         );
     }
