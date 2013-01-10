@@ -115,7 +115,7 @@ class Game
     /**
      * Sort function to sort players by rank of their poker hand
      *
-     * @param array $handRankings Relative ranking of poker hands
+     * @param  array   $handRankings Relative ranking of poker hands
      * @return Closure Sort function to sort players by rank of their poker hand
      */
     public function sortPlayersByHand(array $handRankings)
@@ -134,7 +134,7 @@ class Game
     /**
      * Compares matching poker hands to see which actually wins
      *
-     * @param array $matchingHands Player and hand array
+     * @param  array $matchingHands Player and hand array
      * @return array Winning player and hand
      */
     public function compareMatchingHands(array $matchingHands)
