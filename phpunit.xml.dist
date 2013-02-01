@@ -6,7 +6,7 @@
     colors="true">
 
     <testsuite name="twelve-tdds">
-        <directory>tests/library</directory>
+        <directory>tests/Tdd</directory>
     </testsuite>
 
     <filter>

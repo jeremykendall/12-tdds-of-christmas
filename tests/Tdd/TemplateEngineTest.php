@@ -1,6 +1,8 @@
 <?php
 
-namespace Tdd;
+namespace Tdd\Test;
+
+use Tdd\TemplateEngine;
 
 class TemplateEngineTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,8 @@
 <?php
 
-namespace Tdd;
+namespace Tdd\Test;
+
+use Tdd\PhoneNumber;
 
 class PhoneNumbersTest extends \PHPUnit_Framework_TestCase
 {

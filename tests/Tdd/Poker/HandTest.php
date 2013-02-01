@@ -1,6 +1,8 @@
 <?php
 
-namespace Tdd\Poker;
+namespace Tdd\Test\Poker;
+
+use Tdd\Poker\Hand;
 
 class HandTest extends \PHPUnit_Framework_TestCase
 {

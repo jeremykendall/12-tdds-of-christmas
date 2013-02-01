@@ -1,6 +1,8 @@
 <?php
 
-namespace Tdd;
+namespace Tdd\Test;
+
+use Tdd\BowlingGame;
 
 class BowlingGameTest extends \PHPUnit_Framework_TestCase
 {

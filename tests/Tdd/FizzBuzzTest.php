@@ -1,6 +1,8 @@
 <?php
 
-namespace Tdd;
+namespace Tdd\Test;
+
+use Tdd\FizzBuzz;
 
 /**
  * Test class for FizzBuzz.
